@@ -28,21 +28,12 @@ function turnoMaquina(){
 
 function turnoUsuario(e){
     const nuevoCuadroUsuario = e.target;
-    console.log(nuevoCuadroUsuario);
     resaltar(nuevoCuadroUsuario);
     //validarSeleccionUsuario()
     secuenciaUsuario.push(nuevoCuadroUsuario)
 }
 
-function validarSeleccionUsuario(elementoUsuario, elementoMaquina, i){
-    if (elementoUsuario[i] === elementoMaquina[i]){
-        resaltar(elementoUsuario[i]);
-        setTimeout(turnoMaquina, 500);
-    } else {
-        perderJuego();
-        return;
-    }
-}
+
 
 
 function obtenerCuadro(){
