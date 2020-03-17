@@ -1,5 +1,5 @@
-let secuenciaMaquina = [];
-let secuenciaUsuario = [];
+let secuenciaMaquina = ['azul', 'rojo', 'verde', 'verde', 'rojo', 'rojo'];
+let secuenciaUsuario = ['azul', 'rojo', 'verde', 'verde', 'rojo', 'verde'];
 const $cuadrosSimon = document.querySelectorAll('.cuadro');
 const $botonEmpezar = document.querySelector('#boton-empezar');
 
@@ -34,11 +34,11 @@ function turnoUsuario(){
 }
 
 function validarInputUsuario(secuenciaMaquina, secuenciaUsuario){ 
-    secuenciaMaquina.forEach(function(cuadro, i){  // no se si aca podria ir iterando pero con cada click del usuario, es decir que evalue cada click en tiempo real y no al finalizar la secuencia
-        if (secuenciaMaquina[i] === secuenciaUsuario[i]) {
-            return turnoMaquina(); // aca no se si se puede hacer eso y tampoco lo puedo probar en esta etapa
+    secuenciaMaquina.forEach(funtcion(color, index)){
+        if (color === secuenciaUsuario[i]){
+            
         } else {
-            perder(); // funcion todavia no existe
+            perder();
         }
     })
 }
