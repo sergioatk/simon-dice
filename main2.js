@@ -26,11 +26,21 @@ function turnoMaquina(){
     turnoUsuario();
 }
 
-function turnoUsuario(e){
-    const nuevoCuadroUsuario = e.target;
-    resaltar(nuevoCuadroUsuario);
-    //validarSeleccionUsuario()
-    secuenciaUsuario.push(nuevoCuadroUsuario)
+function turnoUsuario(){
+    const nuevoCuadroUsuario = //aca va el input del usuario
+    secuenciaUsuario.push(nuevoCuadroUsuario);
+    validarInputUsuario(secuenciaMaquina, secuenciaUsuario);
+
+}
+
+function validarInputUsuario(secuenciaMaquina, secuenciaUsuario){ 
+    secuenciaMaquina.forEach(function(cuadro, i){  // no se si aca podria ir iterando pero con cada click del usuario, es decir que evalue cada click en tiempo real y no al finalizar la secuencia
+        if (secuenciaMaquina[i] === secuenciaUsuario[i]) {
+            return turnoMaquina(); // aca no se si se puede hacer eso y tampoco lo puedo probar en esta etapa
+        } else {
+            perder(); // funcion todavia no existe
+        }
+    })
 }
 
 
