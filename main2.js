@@ -1,5 +1,5 @@
-let secuenciaMaquina = [];
-let secuenciaUsuario = [];
+const secuenciaMaquina = [];
+const secuenciaUsuario = [];
 const cuadrosSimon = ['rojo', 'verde', 'azul', 'amarillo'];
 
 
