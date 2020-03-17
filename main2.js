@@ -1,9 +1,6 @@
-let secuenciaMaquina = ['azul', 'rojo', 'verde', 'verde', 'rojo', 'rojo'];
-let secuenciaUsuario = ['azul', 'rojo', 'verde', 'verde', 'rojo', 'verde'];
-const $cuadrosSimon = document.querySelectorAll('.cuadro');
-const $botonEmpezar = document.querySelector('#boton-empezar');
-
-$botonEmpezar.onclick = empezarJuego;
+let secuenciaMaquina = [];
+let secuenciaUsuario = [];
+const cuadrosSimon = ['rojo', 'verde', 'azul', 'amarillo'];
 
 
 function empezarJuego(){
