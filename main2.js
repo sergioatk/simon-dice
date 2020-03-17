@@ -14,12 +14,6 @@ function turnoMaquina(){
     secuenciaMaquina.push(nuevoCuadro);
     
 
-    secuenciaMaquina.forEach(function(cuadro, i){
-        setTimeout(function(){
-            resaltar(cuadro)
-        }, (i + 1) * 1000)
-    })
-
     turnoUsuario();
 }
 
@@ -41,17 +35,10 @@ function validarInputUsuario(secuenciaMaquina, secuenciaUsuario){
 }
 
 
-
-
 function obtenerCuadro(){
     const indiceAleatorio = Math.floor(Math.random() * $cuadrosSimon.length);
-    return $cuadrosSimon[indiceAleatorio]
+    return cuadrosSimon[indiceAleatorio];
 }
 
-function resaltar(cuadro){
-    cuadro.style.opacity = 1;
-    setTimeout(function(){
-        cuadro.style.opacity = 0.5
-    }, 500)
-}
+
 
