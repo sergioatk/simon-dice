@@ -1,5 +1,5 @@
-const secuenciaMaquina = [];
-const secuenciaUsuario = [];
+let secuenciaMaquina = [];
+let secuenciaUsuario = [];
 const cuadrosSimon = ['rojo', 'verde', 'azul', 'amarillo'];
 
 
@@ -13,30 +13,43 @@ function turnoMaquina(){
     let nuevoCuadro = obtenerCuadro()
     secuenciaMaquina.push(nuevoCuadro);
     
+    console.log(`La secuencia de la maquina es: ${secuenciaMaquina}`)
 
-    turnoUsuario();
+
 }
 
-function turnoUsuario(){
-    const nuevoCuadroUsuario = //aca va el input del usuario
-    secuenciaUsuario.push(nuevoCuadroUsuario);
+function inputUsuario(cuadro){
+    secuenciaUsuario.push(cuadro);
     validarInputUsuario(secuenciaMaquina, secuenciaUsuario);
 
 }
 
+
+
 function validarInputUsuario(secuenciaMaquina, secuenciaUsuario){ 
-    secuenciaMaquina.forEach(funtcion(color, index)){
-        if (color === secuenciaUsuario[i]){
-            
-        } else {
-            perder();
+    
+    for (let i = 0 ; i < secuenciaMaquina.length; i++){ //lo hago con for ya que no tengo la certeza de recorrer todas las iteraciones
+       
+        if (secuenciaMaquina[i] != secuenciaUsuario[i]){
+           
+            console.log('perdiste!');
+            secuenciaMaquina = [];
+            secuenciaUsuario = [];
+        
+        } else if ( (i+1) === secuenciaUsuario.length){
+           
+            console.log('siguiente ronda!');
+            secuenciaUsuario = [];
+
+        
         }
-    })
+    }
+    
 }
 
 
 function obtenerCuadro(){
-    const indiceAleatorio = Math.floor(Math.random() * $cuadrosSimon.length);
+    const indiceAleatorio = Math.floor(Math.random() * cuadrosSimon.length);
     return cuadrosSimon[indiceAleatorio];
 }
 
