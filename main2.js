@@ -1,57 +1,137 @@
 let secuenciaMaquina = [];
 let secuenciaUsuario = [];
-const cuadrosSimon = ['rojo', 'verde', 'azul', 'amarillo'];
+let ronda = 0;
+
+
+const $botonEmpezar = document.querySelector('#boton-empezar')
+const $cuadrosSimon = document.querySelectorAll('.cuadro')
+let $barraEstado = document.querySelector('#estado');
+
+
+
+$botonEmpezar.onclick = function(){
+    cambiarEstado('Empieza el juego')   
+    empezarJuego();
+}
 
 
 function empezarJuego(){
+    secuenciaUsuario = [];
+    secuenciaMaquina = [];
     turnoMaquina()
 }
 
 
 
 function turnoMaquina(){
-    let nuevoCuadro = obtenerCuadro()
+
+    cambiarEstado('JUEGA MAQUINA');
+
+    ronda++;
+    actualizarRonda(ronda);
+
+    bloquearInputUsuario();
+
+    const nuevoCuadro = obtenerCuadro()
     secuenciaMaquina.push(nuevoCuadro);
-    
-    console.log(`La secuencia de la maquina es: ${secuenciaMaquina}`)
 
+
+
+    const RETRASO_JUGADOR = (secuenciaMaquina.length + 1) * 1000
+
+    secuenciaMaquina.forEach(function($cuadro, i) {
+
+        const RETRASO_MS = (i + 1) * 1000
+
+        setTimeout(function() {
+            resaltar($cuadro)
+        }, RETRASO_MS)
+    } )
+    
+    setTimeout(function() {
+        cambiarEstado('Turno jugador')
+        desbloquearInputUsuario();
+    }, RETRASO_JUGADOR)
 
 }
 
-function inputUsuario(cuadro){
-    secuenciaUsuario.push(cuadro);
-    validarInputUsuario(secuenciaMaquina, secuenciaUsuario);
 
-}
-
-
-
-function validarInputUsuario(secuenciaMaquina, secuenciaUsuario){ 
+function manejarInputUsuario(e) {
     
-    for (let i = 0 ; i < secuenciaMaquina.length; i++){ //lo hago con for ya que no tengo la certeza de recorrer todas las iteraciones
-       
-        if (secuenciaMaquina[i] != secuenciaUsuario[i]){
-           
-            console.log('perdiste!');
-            secuenciaMaquina = [];
-            secuenciaUsuario = [];
-        
-        } else if ( (i+1) === secuenciaUsuario.length){
-           
-            console.log('siguiente ronda!');
-            secuenciaUsuario = [];
+    const $cuadro = e.target;
+    resaltar($cuadro);
+    secuenciaUsuario.push($cuadro);
+    
+    
+    const $cuadroMaquina = secuenciaMaquina[secuenciaUsuario.length - 1];
 
-        
-        }
+    console.log(`Cuadro maquina es: ${$cuadroMaquina.id}`);
+    console.log(`Cuadro usuario es ${$cuadro.id}`);
+
+
+    if ($cuadro.id != $cuadroMaquina.id) {
+        perder();
+        return;
     }
-    
+
+    if (secuenciaMaquina.length === secuenciaUsuario.length) {
+        
+        bloquearInputUsuario();
+
+        secuenciaUsuario = [];
+        
+        setTimeout(function() {
+            turnoMaquina();
+        }, 1000)
+    }
 }
+
+
 
 
 function obtenerCuadro(){
-    const indiceAleatorio = Math.floor(Math.random() * cuadrosSimon.length);
-    return cuadrosSimon[indiceAleatorio];
+    const indiceAleatorio = Math.floor(Math.random() * $cuadrosSimon.length);
+    return $cuadrosSimon[indiceAleatorio];
 }
 
+function cambiarEstado(nuevoEstado){
+    $barraEstado.innerHTML = nuevoEstado;
+}
 
+function resaltar($cuadro){
+    $cuadro.style.opacity = 1
 
+    setTimeout(function(){
+        $cuadro.style.opacity = 0.5
+    }, 500)
+}
+
+function bloquearInputUsuario() {
+    $cuadrosSimon.forEach(function($cuadro){
+        $cuadro.onclick = function() {
+        
+        }
+    })
+}
+
+function desbloquearInputUsuario() {
+    $cuadrosSimon.forEach(function($cuadro){
+        $cuadro.onclick = manejarInputUsuario;
+        }
+    )
+}
+
+function perder() {
+    bloquearInputUsuario();
+    secuenciaMaquina = [];
+    secuenciaUsuario = [];
+    cambiarEstado('PERDISTE!!')   
+
+    setTimeout(function() {
+        cambiarEstado('toca "empezar" para jugar');
+    }, 1000)
+}
+
+function actualizarRonda(ronda) {
+    document.querySelector('#ronda').innerText = ronda;
+}
